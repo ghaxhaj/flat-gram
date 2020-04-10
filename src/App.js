@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './containers/Home'
-import PostContainer from './containers/PostContainer';
-import FollowersContainer from './containers/FollowersContainer'
 import NavBar from './containers/NavBar'
+import User from './containers/UserContainer'
 
 function App() {
   return (
@@ -14,12 +13,10 @@ function App() {
       <Route exact path="/">
           <Home />
       </Route>
-      <Route path="/posts">
-          <PostContainer />
+      <Route path="/user">
+          <User />
       </Route>
-      <Route path="/followers">
-          <FollowersContainer />
-      </Route>
+    
     </Switch>
       </div>
     </Router>
