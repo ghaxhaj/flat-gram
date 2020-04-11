@@ -1,6 +1,6 @@
 import React from 'react'
-// import Like from './Like'
 import Comment from './Comment'
+import '../styles.css'
 
 class Post extends React.Component{
 
@@ -9,6 +9,14 @@ class Post extends React.Component{
         liked: false,
         addComment: '',
         comments: []
+    }
+
+    componentDidMount(){
+        fetch('http://localhost:3000/api/v1/comments')
+        .then(resp => resp.json())
+        .then(data => this.setState({
+            comments: data
+        }))
     }
 
     handleLike = () => {
@@ -39,7 +47,7 @@ class Post extends React.Component{
             content: this.state.addComment
         }
 
-        // console.log(data)
+
         
         fetch('http://localhost:3000/api/v1/comments', {
             method: 'POST',
@@ -49,7 +57,9 @@ class Post extends React.Component{
         })
 
         .then(resp=>resp.json())
-        .then(comment => this.setState({comments: [...this.state.comments, comment]}))
+        .then(comment => this.setState({
+            comments: [...this.state.comments, comment],
+            addComment: ''}))
     }
 
     mapComments = () => {
@@ -57,16 +67,16 @@ class Post extends React.Component{
     }
 
     render(){
-        // console.log(this.state.addComment)
+
     return(
-        <div>
-            <img src={this.props.content} />
+        <div className = "postStyle">
+            <img className = "postImg" src={this.props.content} />
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>
 
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
-            <button onClick={this.handleLike}>Like</button>
+            <button className = "likeButton"onClick={this.handleLike}>Like</button>
 
             <Comment comment = {this.state.addComment}
             handleChange = {this.handleOnChange}

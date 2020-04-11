@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+*{
+  align-items: center;
+  background-color: lightcyan;
+}
+ 
+.navBar{
+  font-family: "Oswald", sans-serif;
+  color:blue;
+  text-decoration: none;
+  padding: 2em;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
+.navBarComponent {
+  padding: 2em;
+  font-size: 30px
+}
+
+.postImg {
+  height: 500px;
+  width: 500px;
+  align-items: center;
+}
+
+.searchBar {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.postStyle {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.likeButton {
+  background-color: red; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 10px;
+  text-align: right;
+  text-decoration: none;
+  display: flex;
+  font-size: 16px;
+}
+
+
