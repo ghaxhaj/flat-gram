@@ -1,5 +1,5 @@
 import React from 'react'
-import Comment from './Comment'
+import Comment from './CommentForm'
 import '../styles.css'
 
 class Post extends React.Component{
@@ -61,9 +61,15 @@ class Post extends React.Component{
             comments: [...this.state.comments, comment],
             addComment: ''}))
     }
+    
+    handleDelete = (id) => {
+        fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+            method: "DELETE"
+        }).then(this.componentDidMount())
+    }
 
     mapComments = () => {
-    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}</p>)
+    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
     }
 
     render(){
