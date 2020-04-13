@@ -8,7 +8,11 @@ class Post extends React.Component{
         likes: 0,
         liked: false,
         addComment: '',
-        comments: []
+        comments: [],
+
+        editPost: false,
+        newContent:'',
+        userCaption:'',
     }
 
     componentDidMount(){
@@ -16,6 +20,7 @@ class Post extends React.Component{
         .then(resp => resp.json())
         .then(data => this.fetchComments(data))
     }
+    
 
     fetchComments = (data) => {
         let postComments = data.filter(comment => comment.post_id === this.props.id)
@@ -88,6 +93,31 @@ class Post extends React.Component{
         }).then(resp => resp.json())
         .then(data => this.props.renderPosts(this.props.id))
     }
+
+    handleEditPost = () => {
+        this.setState({editPost: !this.state.editPost })  
+    }
+
+    handleEditPostSubmit = (event) => {
+        event.preventDefault()
+        
+        fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
+            method: 'PATCH',
+            headers: {"Content-Type": "application/json",
+                      "Accept": "application/json"},    
+            body: JSON.stringify({
+                content: this.state.newContent, 
+                user_caption: this.state.userCaption
+            })
+        })
+        .then(resp=>resp.json())
+        .then(data =>  {console.log('***update data **', data) 
+            this.props.handleUpdatePost(data)
+        })
+
+        this.setState({ newContent: "" , userCaption: '', editPost: false })  
+    } 
+
     
 
     render(){
@@ -102,6 +132,24 @@ class Post extends React.Component{
 
             <button className = "likeButton"onClick={this.handleLike}>Like</button>
             <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button>
+            
+            <button onClick={this.handleEditPost}>Edit</button>
+            {this.state.editPost ? 
+                <form onSubmit={this.handleEditPostSubmit}>
+                    <label>content:</label>
+                        <input type="text"
+                            name="newContent"
+                            value={this.state.newContent}
+                            onChange={this.handleOnChange}/>
+                    <label> User Caption:</label>
+                        <input type="text"
+                            name="userCaption"
+                            value={this.state.userCaption}
+                            onChange={this.handleOnChange}/>
+                    <input type='Submit' value="Submit" />
+                </form>
+            : 
+            null}
 
             <Comment comment = {this.state.addComment}
             handleChange = {this.handleOnChange}

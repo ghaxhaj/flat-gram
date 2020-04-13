@@ -59,9 +59,16 @@ class UserContainer extends React.Component {
             this.setState({posts: newPosts})
         }
 
-       
-    
-
+        handleUpdatePost = (updatedPost) => {
+            let newPosts = this.state.posts.map(post => {
+                if (post.id===updatedPost.id){
+                    return updatedPost
+                }else {
+                    return post
+                }
+            })
+            this.setState({posts: newPosts})
+        }
     render(){
         // console.log(this.state)
         return (
@@ -74,7 +81,10 @@ class UserContainer extends React.Component {
                 handleOnChange = {this.handleOnChange} 
                 handleSubmit = {this.handleSubmit}
                 handleButtonClick = {this.renderPostForm}
-                renderPosts = {this.handleDeletePost}/>
+                renderPosts = {this.handleDeletePost}
+                handleUpdatePost={this.handleUpdatePost}
+                />
+                
                 <FollowersContainer />
             </div>
         )
