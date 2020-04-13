@@ -1,6 +1,6 @@
 import React from 'react'
-// import Like from './Like'
-import Comment from './Comment'
+import Comment from './CommentForm'
+import '../styles.css'
 
 class Post extends React.Component{
 
@@ -9,6 +9,19 @@ class Post extends React.Component{
         liked: false,
         addComment: '',
         comments: []
+    }
+
+    componentDidMount(){
+        fetch('http://localhost:3000/api/v1/comments')
+        .then(resp => resp.json())
+        .then(data => this.fetchComments(data))
+    }
+
+    fetchComments = (data) => {
+        let postComments = data.filter(comment => comment.post_id === this.props.id)
+        this.setState({
+            comments: postComments
+        })
     }
 
     handleLike = () => {
@@ -49,24 +62,32 @@ class Post extends React.Component{
         })
 
         .then(resp=>resp.json())
-        .then(comment => this.setState({comments: [...this.state.comments, comment]}))
+        .then(comment => this.setState({
+            comments: [...this.state.comments, comment],
+            addComment: ''},console.log(comment)),)
+    }
+    
+    handleDelete = (id) => {
+        fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+            method: "DELETE"
+        }).then(this.componentDidMount())
     }
 
     mapComments = () => {
-    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}</p>)
+    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
     }
 
     render(){
-        // console.log(this.state.addComment)
+        
     return(
-        <div>
-            <img src={this.props.content} />
+        <div className = "postStyle">
+            <img className = "postImg" src={this.props.content} />
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>
 
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
-            <button onClick={this.handleLike}>Like</button>
+            <button className = "likeButton"onClick={this.handleLike}>Like</button>
 
             <Comment comment = {this.state.addComment}
             handleChange = {this.handleOnChange}

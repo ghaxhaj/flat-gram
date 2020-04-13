@@ -1,4 +1,6 @@
 import React from 'react'
+import '../styles.css'
+
 
 const Comment = (props) => {
     return(
@@ -8,7 +10,7 @@ const Comment = (props) => {
             name="addComment"
             value={props.comment}
             onChange={props.handleChange}/>
-            <button onClick={props.handleSubmit}>Add Comment</button>
+            <button onClick={props.handleSubmit} className = "button">Add Comment</button>
             
         </form>
     )
