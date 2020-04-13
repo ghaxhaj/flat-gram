@@ -52,10 +52,25 @@ class UserContainer extends React.Component {
                 clicked: !this.state.clicked
             })
         }
-    
 
+        handleDeletePost = (postId) => {
+            // console.log(postId)
+            let newPosts = this.state.posts.filter(post => post.id !== postId)
+            this.setState({posts: newPosts})
+        }
+
+        handleUpdatePost = (updatedPost) => {
+            let newPosts = this.state.posts.map(post => {
+                if (post.id===updatedPost.id){
+                    return updatedPost
+                }else {
+                    return post
+                }
+            })
+            this.setState({posts: newPosts})
+        }
     render(){
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <div>
                 <h1></h1>
@@ -65,7 +80,11 @@ class UserContainer extends React.Component {
                 addedCaption = {this.state.addedCaption}
                 handleOnChange = {this.handleOnChange} 
                 handleSubmit = {this.handleSubmit}
-                handleButtonClick = {this.renderPostForm}/>
+                handleButtonClick = {this.renderPostForm}
+                renderPosts = {this.handleDeletePost}
+                handleUpdatePost={this.handleUpdatePost}
+                />
+                
                 <FollowersContainer />
             </div>
         )
