@@ -64,18 +64,31 @@ class Post extends React.Component{
         .then(resp=>resp.json())
         .then(comment => this.setState({
             comments: [...this.state.comments, comment],
-            addComment: ''},console.log(comment)),)
+            addComment: ''}),)
     }
     
     handleDelete = (id) => {
         fetch(`http://localhost:3000/api/v1/comments/${id}`, {
             method: "DELETE"
-        }).then(this.componentDidMount())
+        }).then(this.updateComments(id))
+    }
+
+    updateComments = (commentId) => {
+        let updatedComments = this.state.comments.filter(comment => comment.id !== commentId)
+        this.setState({comments: updatedComments})
     }
 
     mapComments = () => {
     return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
     }
+
+    handlePostDelete = () => {
+        fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
+            method: "DELETE"
+        }).then(resp => resp.json())
+        .then(data => this.props.renderPosts(this.props.id))
+    }
+    
 
     render(){
         
@@ -88,6 +101,7 @@ class Post extends React.Component{
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
             <button className = "likeButton"onClick={this.handleLike}>Like</button>
+            <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button>
 
             <Comment comment = {this.state.addComment}
             handleChange = {this.handleOnChange}
