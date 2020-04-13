@@ -1,6 +1,12 @@
 import React from 'react'
 import Comment from './CommentForm'
 import '../styles.css'
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Switch,
+  } from 'react-router-dom';
 
 class Post extends React.Component{
 
@@ -13,6 +19,9 @@ class Post extends React.Component{
         editPost: false,
         newContent:'',
         userCaption:'',
+
+        addNewComment: false
+
     }
 
     componentDidMount(){
@@ -84,7 +93,7 @@ class Post extends React.Component{
     }
 
     mapComments = () => {
-    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
+    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button className='CommentDeleteButoon' onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
     }
 
     handlePostDelete = () => {
@@ -118,22 +127,28 @@ class Post extends React.Component{
         this.setState({ newContent: "" , userCaption: '', editPost: false })  
     } 
 
+    handleAddComment = () => {
+        this.setState({ addNewComment: !this.state.addNewComment})
+    }
+
     
 
     render(){
         
     return(
         <div className = "postStyle">
-            <img className = "postImg" src={this.props.content} />
+        <Link to={`/posts/${this.props.id}`}>
+            <img  className = "postImg" src={this.props.content} />
+        </Link>
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>
 
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
-            <button className = "likeButton"onClick={this.handleLike}>Like</button>
+            <button className = "button" onClick={this.handleLike}>Like</button>
             <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button>
             
-            <button onClick={this.handleEditPost}>Edit</button>
+            <button className = "button" onClick={this.handleEditPost}>Edit</button>
             {this.state.editPost ? 
                 <form onSubmit={this.handleEditPostSubmit}>
                     <label>content:</label>
@@ -149,11 +164,17 @@ class Post extends React.Component{
                     <input type='Submit' value="Submit" />
                 </form>
             : 
+            null}  
+
+
+            <button className = "button" onClick={this.handleAddComment}>AddComment</button>
+            {this.state.addNewComment ? 
+                <Comment comment = {this.state.addComment}
+                handleChange = {this.handleOnChange}
+                handleSubmit = {this.handleCommentSubmit}/>   
+            : 
             null}
 
-            <Comment comment = {this.state.addComment}
-            handleChange = {this.handleOnChange}
-            handleSubmit = {this.handleCommentSubmit}/>
 
         </div>
     )
