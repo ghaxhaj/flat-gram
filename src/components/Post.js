@@ -14,9 +14,14 @@ class Post extends React.Component{
     componentDidMount(){
         fetch('http://localhost:3000/api/v1/comments')
         .then(resp => resp.json())
-        .then(data => this.setState({
-            comments: data
-        }))
+        .then(data => this.fetchComments(data))
+    }
+
+    fetchComments = (data) => {
+        let postComments = data.filter(comment => comment.post_id === this.props.id)
+        this.setState({
+            comments: postComments
+        })
     }
 
     handleLike = () => {
@@ -47,7 +52,7 @@ class Post extends React.Component{
             content: this.state.addComment
         }
 
-
+        // console.log(data)
         
         fetch('http://localhost:3000/api/v1/comments', {
             method: 'POST',
@@ -59,7 +64,7 @@ class Post extends React.Component{
         .then(resp=>resp.json())
         .then(comment => this.setState({
             comments: [...this.state.comments, comment],
-            addComment: ''}))
+            addComment: ''},console.log(comment)),)
     }
     
     handleDelete = (id) => {
@@ -73,7 +78,7 @@ class Post extends React.Component{
     }
 
     render(){
-
+        
     return(
         <div className = "postStyle">
             <img className = "postImg" src={this.props.content} />
