@@ -1,23 +1,25 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import '../styles.css'
+import UserController from '../components/UserController'
 // import SearchBar from '../components/SearchBar'
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
-        <div className = "navBar">
+        <div className= "navBar">
+            <div className= "logo">
+                <img className= "logoI" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F48394057%2F258081453087%2F2%2Foriginal.png?w=225&auto=format%2Ccompress&q=75&sharp=10&s=1d4ef9cb6418dc61ebdbb3ab0b587963" /> </div>
+            <div className= "logo">
+                <UserController  logout={props.logout} currentUser={props.currentUser} /> </div>
+            <div className= "logo">
+                <NavLink  to='/posts'>Home</NavLink> </div>
+            <div className= "logo">
+                <NavLink  to="/user">User</NavLink> </div>
+            <div className= "logo">
+                <NavLink  to="/">LogOut</NavLink> </div>
+            {/* <div className= "logo">
+                <input className= "logo" type="text" placeholder="Search.." className = "searchBar"/> </div> */}
           
-            <img class= "logo" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F48394057%2F258081453087%2F2%2Foriginal.png?w=225&auto=format%2Ccompress&q=75&sharp=10&s=1d4ef9cb6418dc61ebdbb3ab0b587963" />
-        
-
-            <NavLink className = "navBarComponent" to='/posts'>Home</NavLink>
-          
-            <NavLink className = "navBarComponent" to="/user">User</NavLink>
-        
-            <NavLink className = "navBarComponent" to="/">LogOut</NavLink>
-        
-            <input type="text" placeholder="Search.." className = "searchBar"/>
-
         </div>
     )
 }
