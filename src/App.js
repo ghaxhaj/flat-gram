@@ -64,11 +64,11 @@ class  App extends Component {
       
         <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
         
-        {/* {this.state.currentUser ? <MainContainer /> : null } */}
+        {this.state.currentUser ? 
         <Switch>
-          <Route exact path="/"> <Home /> </Route>
+          {/* <Route exact path="/"> <Home /> </Route>
           <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
-          <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/>
+          <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/> */}
 
           <Route path="/posts/:id"> <ShowSinglePost /> </Route>
           <Route path="/posts"> <PostContainer /> </Route>
@@ -77,6 +77,27 @@ class  App extends Component {
           <Route exact path="/users"> <UserContainer /> </Route>
 
         </Switch>
+        : 
+        <div>
+
+          <h1> 🤙🤙🤙 Please Login or SignUp 🤙🤙🤙  </h1>
+
+          <Switch>
+          
+            <Route exact path="/"> <Home /> </Route>
+            <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
+            <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/>
+
+            {/* <Route path="/posts/:id"> <ShowSinglePost /> </Route>
+            <Route path="/posts"> <PostContainer /> </Route>
+
+            <Route  path="/users/:id"> <ShowSingleUser /> </Route>
+            <Route exact path="/users"> <UserContainer /> </Route> */}
+
+          </Switch>
+        </div>
+         
+        }
      
     </Router>
   );
