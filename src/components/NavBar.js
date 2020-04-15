@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import '../styles.css'
-import UserController from '../components/UserController'
-// import SearchBar from '../components/SearchBar'
+import UserController from './UserController'
+import Posts from './Posts'
+import ShowSingleUser from './ShowSingleUser' 
+
 
 const NavBar = (props) => {
     return (
@@ -11,12 +13,16 @@ const NavBar = (props) => {
                 <img className= "logoI" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F48394057%2F258081453087%2F2%2Foriginal.png?w=225&auto=format%2Ccompress&q=75&sharp=10&s=1d4ef9cb6418dc61ebdbb3ab0b587963" /> </div>
             <div className= "logo">
                 <UserController  logout={props.logout} currentUser={props.currentUser} /> </div>
+            
             <div className= "logo">
                 <NavLink  to='/posts'>Home</NavLink> </div>
+            
             <div className= "logo">
-                <NavLink  to="/user">User</NavLink> </div>
-            <div className= "logo">
-                <NavLink  to="/">LogOut</NavLink> </div>
+                <NavLink  to="/users/2">Profil</NavLink> </div>
+            
+            {/* <div className= "logo">
+                <NavLink  to="/">LogOut</NavLink> </div> */}
+            
             {/* <div className= "logo">
                 <input className= "logo" type="text" placeholder="Search.." className = "searchBar"/> </div> */}
           
