@@ -7,6 +7,8 @@ import ShowSingleUser from './ShowSingleUser'
 
 
 const NavBar = (props) => {
+    
+    console.log('****navbar props ***' , props)
     return (
         <div className= "navBar">
             <div className= "logo">
@@ -18,7 +20,10 @@ const NavBar = (props) => {
                 <NavLink  to='/posts'>Home</NavLink> </div>
             
             <div className= "logo">
-                <NavLink  to="/users/2">Profil</NavLink> </div>
+                <NavLink  to='/users'>Users</NavLink> </div>
+            
+            <div className= "logo">
+                <NavLink  to="/users/:id">Profil</NavLink> </div>
             
             {/* <div className= "logo">
                 <NavLink  to="/">LogOut</NavLink> </div> */}
