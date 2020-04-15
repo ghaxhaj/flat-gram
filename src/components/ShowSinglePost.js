@@ -6,18 +6,17 @@ import { withRouter } from "react-router";
 class ShowSinglePost extends Component{
 
     state = {
-        targetPost: {}
+        targetPost: {comments:[]}
     }
     componentDidMount(){
-        let { id } = this.props.match.params;
-                        
+        let { id } = this.props.match.params;              
         fetch(`http://localhost:3000/api/v1/posts/${id}`)
         .then(res => res.json())
         .then(targetPost => this.setState({targetPost}))
     }
 
     mapComments = () => {
-        return this.state.targetPost.comments.map(comment => <p>{comment.content}</p>)
+        return this.state.targetPost.comments.map((comment) => <p>{comment.content}</p>)
     }
     render(){
 
@@ -36,9 +35,9 @@ class ShowSinglePost extends Component{
                 caption: {this.state.targetPost.user_caption}
                 <br></br>
                 <ul>
-                commets: 
+                comments: 
                 <br></br> 
-                {this.mapComments}
+                {this.mapComments()}
                 </ul>
                 
             </div>
