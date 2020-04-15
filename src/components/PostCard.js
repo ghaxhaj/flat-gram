@@ -1,5 +1,6 @@
-import React from 'react'
-import Comment from './CommentForm'
+import React, {Component} from 'react'
+import CommentForm from './CommentForm'
+import Like from './Like'
 import '../styles.css'
 import {
     BrowserRouter as Router,
@@ -8,7 +9,7 @@ import {
     Switch,
   } from 'react-router-dom';
 
-class Post extends React.Component{
+class PostCard extends Component{
 
     state = {
         likes: 0,
@@ -134,7 +135,7 @@ class Post extends React.Component{
     
 
     render(){
-        
+        console.log('*****poste attributee******', this.props )
     return(
         <div className = "postStyle">
         <Link to={`/posts/${this.props.id}`}>
@@ -169,7 +170,7 @@ class Post extends React.Component{
 
             <button className = "button" onClick={this.handleAddComment}>AddComment</button>
             {this.state.addNewComment ? 
-                <Comment comment = {this.state.addComment}
+                <CommentForm comment = {this.state.addComment}
                 handleChange = {this.handleOnChange}
                 handleSubmit = {this.handleCommentSubmit}/>   
             : 
@@ -180,5 +181,4 @@ class Post extends React.Component{
     )
 }}
 
-export default Post
-
+export default PostCard

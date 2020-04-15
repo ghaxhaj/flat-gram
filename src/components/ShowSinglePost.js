@@ -47,4 +47,3 @@ class ShowSinglePost extends Component{
 
 
     export default withRouter(ShowSinglePost);
-    

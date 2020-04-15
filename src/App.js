@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from './containers/Home'
-import NavBar from './containers/NavBar'
-import User from './containers/UserContainer'
-import Post from './components/Post'
-import SignupForm from './components/SignupForm'
-import LoginForm from './components/LoginForm'
-import ShowSinglePost from './components/ShowSinglePost';
+import {Home, Users, Posts, SignupForm, NavBar, SearchBar, 
+        LoginForm, ShowSinglePost, ShowSingleUser} from './components'
+import UserContainer from './containers/UserContainer'
+import PostContainer from './containers/PostContainer'
+import MainContainer from './containers/MainContainer'
+
 
 class  App extends Component {
   state = { 
@@ -58,19 +57,48 @@ class  App extends Component {
 
 
   render() {
-  return (
-    <Router>
-      <div>
-        <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
-    <Switch>
-      <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
-      <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/>
 
-      <Route path="/posts/:id"> <ShowSinglePost /> </Route>
-      <Route path="/posts"> <User /> </Route>
-      <Route exact path="/"> <Home /> </Route>
-    </Switch>
-      </div>
+  return (
+
+    <Router>
+      
+        <NavBar currentUser={this.state.currentUser} logout={this.logout}/>
+        
+        {this.state.currentUser ? 
+        <Switch>
+          {/* <Route exact path="/"> <Home /> </Route>
+          <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
+          <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/> */}
+
+          <Route path="/posts/:id"> <ShowSinglePost /> </Route>
+          <Route path="/posts"> <PostContainer /> </Route>
+
+          <Route  path="/users/:id"> <ShowSingleUser /> </Route>
+          <Route exact path="/users"> <UserContainer /> </Route>
+
+        </Switch>
+        : 
+        <div>
+
+          <h1> 🤙🤙🤙 Please Login or SignUp 🤙🤙🤙  </h1>
+
+          <Switch>
+          
+            <Route exact path="/"> <Home /> </Route>
+            <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
+            <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/>
+
+            {/* <Route path="/posts/:id"> <ShowSinglePost /> </Route>
+            <Route path="/posts"> <PostContainer /> </Route>
+
+            <Route  path="/users/:id"> <ShowSingleUser /> </Route>
+            <Route exact path="/users"> <UserContainer /> </Route> */}
+
+          </Switch>
+        </div>
+         
+        }
+     
     </Router>
   );
   }
