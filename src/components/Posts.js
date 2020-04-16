@@ -14,13 +14,14 @@ class Posts extends Component {
         return this.props.posts.map(post => {
             return <PostCard key={post.id} 
             renderPosts = {this.props.renderPosts} {...post} 
-            handleUpdatePost={this.props.handleUpdatePost} />
+            handleUpdatePost={this.props.handleUpdatePost} 
+            currentUser = {this.props.currentUser}/>
             }
         )}
         }
 
     render(){
-            console.log('***props***' , this.props)
+            // console.log('***props***' , this.props)
         return (
             <div>
                 {this.props.clicked ? 

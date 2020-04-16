@@ -9,6 +9,7 @@ import {
     Switch,
   } from 'react-router-dom';
 
+
 class PostCard extends Component{
 
     state = {
@@ -16,6 +17,8 @@ class PostCard extends Component{
         liked: false,
         addComment: '',
         comments: [],
+        currentLikeId: '',
+       
 
         editPost: false,
         newContent:'',
@@ -29,8 +32,14 @@ class PostCard extends Component{
         fetch('http://localhost:3000/api/v1/comments')
         .then(resp => resp.json())
         .then(data => this.fetchComments(data))
+        fetch("http://localhost:3000/api/v1/likes")
+        .then(resp => resp.json())
+        .then(likes => this.fetchLikes(likes))
+
     }
     
+
+
 
     fetchComments = (data) => {
         let postComments = data.filter(comment => comment.post_id === this.props.id)
@@ -39,12 +48,42 @@ class PostCard extends Component{
         })
     }
 
+    fetchLikes = (likes) => {
+        let postLikes = likes.filter(like => like.post_id === this.props.id)
+        let likeCount = postLikes.length
+        this.setState({likes: likeCount})
+    }
+
+    
+
     handleLike = () => {
+
         if(this.state.liked === false){
-        this.setState({
+
+        let data = {
+            user_id: this.props.currentUser.id,
+            post_id: this.props.id,
+            count: 1
+        }
+
+        // console.log(data)
+
+        fetch("http://localhost:3000/api/v1/likes", {
+            method: "POST",
+            headers: {"Content-Type": "application/json",
+            "Accept": "application/json"},    
+            body: JSON.stringify(data)})
+            .then(resp => resp.json())
+            .then(like => this.setState({currentLikeId: like.id}))
+            
+            this.setState({
+            
             liked: !this.state.liked,
             likes: this.state.likes + 1
-        })}else{
+        })}
+        else{
+            fetch(`http://localhost:3000/api/v1/likes/${this.state.currentLikeId}`, {
+            method: "DELETE"})
             this.setState({
                 liked: !this.state.liked,
                 likes: this.state.likes - 1
@@ -62,7 +101,7 @@ class PostCard extends Component{
         event.preventDefault()
 
         let data = {
-            user_id: 1,
+            user_id: this.props.currentUser.id,
             post_id: this.props.id,
             content: this.state.addComment
         }
@@ -121,9 +160,7 @@ class PostCard extends Component{
             })
         })
         .then(resp=>resp.json())
-        .then(data =>  {console.log('***update data **', data) 
-            this.props.handleUpdatePost(data)
-        })
+        .then(data =>  {this.props.handleUpdatePost(data)})
 
         this.setState({ newContent: "" , userCaption: '', editPost: false })  
     } 
@@ -135,7 +172,8 @@ class PostCard extends Component{
     
 
     render(){
-        console.log('*****poste attributee******', this.props )
+        // console.log(this.state.allLikes)
+        
     return(
         <div className = "userCardDiv">
         <Link to={`/posts/${this.props.id}`}>
@@ -146,7 +184,7 @@ class PostCard extends Component{
 
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
-            <button className = "button" onClick={this.handleLike}>Like</button>
+            <Like handleLike = {this.handleLike}/>
             <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button>
             
             <button className = "button" onClick={this.handleEditPost}>Edit</button>

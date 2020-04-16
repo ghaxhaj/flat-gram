@@ -85,7 +85,7 @@ class UserCard extends Component {
 
                     
                     { this.props.id === this.props.currentUser.id ? 
-                        <button onClick={this.toggleEdite}> Edit Profil </button>
+                        <button className = "button" onClick={this.toggleEdite}> Edit Profile </button>
                     : null}
                     {this.state.edit? 
                         <form className='userCardDiv' onSubmit={this.handleSubmit} >
@@ -125,13 +125,13 @@ class UserCard extends Component {
 
                     
                     { this.props.id === this.props.currentUser.id ? 
-                    <button onClick={this.handleUserDelete}> Delete Profil </button> 
+                    <button className = "button"onClick={this.handleUserDelete}> Delete Profile </button> 
                     : 
                         null 
                     }
                     
                     { this.props.id === this.props.currentUser.id ? null:
-                        <button Follow> Follow </button> 
+                        <button className = "button" Follow> Follow </button> 
                     }
   
                         

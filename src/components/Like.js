@@ -1,8 +1,10 @@
 import React from 'react'
+import '../styles.css'
 
-const Like = () => {
+
+const Like = (props) => {
     return(
-        <button> Like </button>
+        <button className = "button" onClick = {props.handleLike}> Like </button>
     )
 }
 

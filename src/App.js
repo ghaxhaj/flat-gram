@@ -17,7 +17,7 @@ class  App extends Component {
     
     if(token){
       //get user info
-      console.log(token)
+      // console.log(token)
 
       fetch("http://localhost:3000/api/v1/auto_login", {
         headers: {
@@ -26,7 +26,7 @@ class  App extends Component {
       })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.errors){
           alert(response.errors)
         } else {
@@ -57,7 +57,7 @@ class  App extends Component {
 
 
   render() {
-    console.log('****app  ***' , this.currentUser)
+    // console.log('****app  ***' , this.currentUser)
 
   return (
 
@@ -72,7 +72,7 @@ class  App extends Component {
           <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/> */}
           
           <Route path="/posts/:id"> <ShowSinglePost /> </Route>
-          <Route path="/posts"> <PostContainer /> </Route>
+          <Route path="/posts"> <PostContainer currentUser = {this.state.currentUser}/> </Route>
 
           <Route path="/users/login"> <Profil currentUser={this.state.currentUser}/> </Route>
           <Route  path="/users/:id"> <ShowSingleUser  /> </Route>

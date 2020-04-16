@@ -9,7 +9,7 @@ import Profil from './Profil'
 
 const NavBar = (props) => {
     
-    console.log('****navbar props ***' , props.currentUser)
+    // console.log('****navbar props ***' , props.currentUser)
     let id = props.currentUser
     return (
         <div className= "navBar">

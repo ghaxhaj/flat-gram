@@ -14,7 +14,7 @@ class PostContainer extends Component {
     }
 
     componentDidMount(){
-        console.log('mounted')
+        // console.log('mounted')
         fetch('http://localhost:3000/api/v1/posts')
         .then(resp => resp.json())
         .then(posts => this.setState({posts}) )
@@ -74,7 +74,7 @@ class PostContainer extends Component {
             this.setState({posts: newPosts})
         }
     render(){
-        console.log("****posts***" , this.state.posts)
+        // console.log("****posts***" , this.state.posts)
         return (
             <div>
                 <h1></h1>
@@ -87,6 +87,7 @@ class PostContainer extends Component {
                 handleButtonClick = {this.renderPostForm}
                 renderPosts = {this.handleDeletePost}
                 handleUpdatePost={this.handleUpdatePost}
+                currentUser = {this.props.currentUser}
                 />
                 
                

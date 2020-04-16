@@ -56,7 +56,7 @@ class ShowSingleUser extends Component{
         // console.log('*** target id***', id)
         // console.log('*** targetUser***', this.state.targetUser)
         return(
-            <div>
+            <div className = "postStyle">
                 <h1>User More Details</h1>
                     <img src={this.state.targetUser.imageUrl} alt={this.state.targetUser.name}/> 
                     <br></br>
