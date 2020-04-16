@@ -6,25 +6,41 @@
 }
  
 .navBar{
+  margin-top: 1px;
+  height: 50px;
   font-family: "Oswald", sans-serif;
-  color:blue;
+  background-color:orange;
   text-decoration: none;
   padding: 2em;
 }
 
 .logo {
+  padding-top: 1%;
+  text-align: center;
+  background-color: aliceblue;
   height: 50px;
-  width: 50px;
+  width: 12%;
+  margin: 2px;
+  float: left;
+}
+.logoI {
+  padding-top: 0%;
+  text-align: auto;
+  background-color: aliceblue;
+  height: 40px;
+  width: 90%;
+  margin: 2px;
+  float: left;
 }
 
 .navBarComponent {
-  padding: 2em;
+  padding: 1em;
   font-size: 30px
 }
 
 .postImg {
-  height: 500px;
-  width: 500px;
+  height: 80%;
+  width: 90%;
   align-items: center;
 }
 
@@ -51,6 +67,10 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  margin: 3px;
+}
+.CommentDeleteButoon{
+  background-color: orangered;
 }
 
 .likeButton {
@@ -62,6 +82,27 @@
   text-decoration: none;
   display: flex;
   font-size: 16px;
+}
+
+/* *********** user card  */
+
+.userCardDiv{
+     -moz-border-radius: 6px;
+     -webkit-border-radius: 6px;
+     background-color: #f0f7fb;
+     border: solid 1px #3498db;
+     border-radius: 6px;
+     line-height: 18px;
+     /* mc-auto-number-format: '{b}Note: {/b}'; */
+     overflow: hidden;
+     padding: 12px;
+     width: 60%;
+     text-align: center;
+     /* padding: 5px; */
+     margin-left: 20%;
+     margin-top: 20px;
+     font-family: "Oswald", sans-serif;
+     font-size: 20px;
 }
 
 

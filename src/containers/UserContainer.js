@@ -1,27 +1,28 @@
-import React from 'react'
-import PostContainer from '../containers/PostContainer'
-import FollowersContainer from '../containers/FollowersContainer'
+import React, {Component} from 'react'
+import Users from '../components/Users'
+import ShowSingleUser from '../components/ShowSingleUser'
+import { withRouter } from "react-router";
+ 
 
 
-class UserContainer extends React.Component {
+class UserContainer extends Component {
 
     state = {
-        posts: [],
-        addedUrl: '',
-        addedCaption: '',
-        clicked: false
+        users: [],
+        
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/api/v1/posts').then(resp => resp.json()).then(posts => this.setState({posts: posts}))
+        fetch('http://localhost:3000/api/v1/users')
+        .then(resp => resp.json())
+        .then(users => this.setState({users}))
     }
-
-    handleOnChange = (event) => {
-
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+    deleteProfil = (UserTODelelte) => {
+        console.log('user to delete ****' , UserTODelelte)
+        let newUsers = this.state.users.filter(user => user.id !== UserTODelelte.id)
+        this.setState({users: newUsers})
     }
+<<<<<<< HEAD
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -73,13 +74,25 @@ class UserContainer extends React.Component {
             })
             this.setState({posts: newPosts})
         }
+=======
+>>>>>>> Granito
     
-
+    handleUpdateProfil = (updatedProfil) => {
+        let newUsers = this.state.users.map(user => {
+            if (user.id===updatedProfil.id){
+                return updatedProfil
+            }else {
+                return user
+            }
+        })
+        this.setState({users: newUsers})
+    }
     render(){
-        // console.log(this.state)
+      
         return (
             <div>
                 <h1></h1>
+<<<<<<< HEAD
                 <PostContainer posts ={this.state.posts} 
                 clicked = {this.state.clicked}
                 addUrl = {this.state.addedUrl}
@@ -90,9 +103,16 @@ class UserContainer extends React.Component {
                 renderPosts = {this.handleDeletePost}
                 handleEdit = {this.handleUpdatePost}/>
                 <FollowersContainer />
+=======
+                <Users users ={this.state.users} 
+                handleUpdateProfil={this.handleUpdateProfil}  
+                deleteProfil={this.deleteProfil}  
+                currentUser={this.props.currentUser}
+
+                />
+>>>>>>> Granito
             </div>
         )
     }
 }
-
 export default UserContainer
