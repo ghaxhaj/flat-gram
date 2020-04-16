@@ -9,7 +9,8 @@ class Users extends Component {
   
 renderUsers = () => {
     return this.props.users.map(user => <UserCard className='userCardDiv' key={user.id} 
-     {...user} 
+     {...user} handleUpdateProfil={this.props.handleUpdateProfil} 
+     deleteProfil={this.props.deleteProfil}
      />)}
 
 
