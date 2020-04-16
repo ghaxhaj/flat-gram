@@ -16,7 +16,7 @@ class Users extends Component {
 
     renderUsers = () => {
         return this.props.users
-        .filter(user => user.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        .filter(user => user.userName.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         .map(user => <UserCard className='userCardDiv' key={user.id} 
         {...user} handleUpdateProfil={this.props.handleUpdateProfil} 
         deleteProfil={this.props.deleteProfil} 

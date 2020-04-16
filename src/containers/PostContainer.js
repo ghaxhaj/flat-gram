@@ -6,20 +6,17 @@ import Posts from '../components/Posts'
 
 class PostContainer extends Component {
 
-<<<<<<< HEAD
 renderPosts = () => {
-    return this.props.posts.map(post => <Post key={post.id} 
+    return this.props.posts.map(post => <Posts key={post.id} 
         renderPosts = {this.props.renderPosts}
         updatePost = {this.props.handleEdit} 
         {...post} />)}
-=======
     state = {
         posts: [],
         addedUrl: '',
         addedCaption: '',
         clicked: false
     }
->>>>>>> Granito
 
     componentDidMount(){
         // console.log('mounted')
