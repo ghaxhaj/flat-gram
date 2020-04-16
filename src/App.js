@@ -74,7 +74,7 @@ class  App extends Component {
           <Route path="/posts"> <PostContainer /> </Route>
 
           <Route  path="/users/:id"> <ShowSingleUser  /> </Route>
-          <Route exact path="/users"> <UserContainer /> </Route>
+          <Route exact path="/users"> <UserContainer currentUser={this.state.currentUser}/> </Route>
 
         </Switch>
         : 

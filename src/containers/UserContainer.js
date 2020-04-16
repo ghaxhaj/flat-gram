@@ -40,7 +40,10 @@ class UserContainer extends Component {
                 <h1></h1>
                 <Users users ={this.state.users} 
                 handleUpdateProfil={this.handleUpdateProfil}  
-                deleteProfil={this.deleteProfil} />
+                deleteProfil={this.deleteProfil}  
+                currentUser={this.props.currentUser}
+
+                />
             </div>
         )
     }

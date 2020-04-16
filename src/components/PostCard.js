@@ -137,7 +137,7 @@ class PostCard extends Component{
     render(){
         console.log('*****poste attributee******', this.props )
     return(
-        <div className = "postStyle">
+        <div className = "userCardDiv">
         <Link to={`/posts/${this.props.id}`}>
             <img  className = "postImg" src={this.props.content} />
         </Link>

@@ -81,12 +81,14 @@ class UserCard extends Component {
                     <h1 > Name: {this.props.name}</h1>    
                     <h1 > userName: {this.props.userName}</h1> 
                     <h1 > Email: {this.props.email}</h1>
-
-
                     <br></br>
-                    <button onClick={this.toggleEdite}> Edit Profil </button>
+
+                    
+                    { this.props.id === this.props.currentUser.id ? 
+                        <button onClick={this.toggleEdite}> Edit Profil </button>
+                    : null}
                     {this.state.edit? 
-                        <form onSubmit={this.handleSubmit} >
+                        <form className='userCardDiv' onSubmit={this.handleSubmit} >
                             <label>Name:</label>
                                 <input type="text"
                                     name="name"
@@ -112,14 +114,26 @@ class UserCard extends Component {
                                     name="imageUrl"
                                     value={this.state.imageUrl}
                                     onChange={this.handleOnChange}/>
+                                    <br></br>
+                                    <br></br>
                             <input type='Submit' value="Submit" />
                         </form>
                     :
                         null
                     }
-                    <button onClick={this.handleUserDelete}> Delete Profil </button> 
                     
-                         
+
+                    
+                    { this.props.id === this.props.currentUser.id ? 
+                    <button onClick={this.handleUserDelete}> Delete Profil </button> 
+                    : 
+                        null 
+                    }
+                    
+                    { this.props.id === this.props.currentUser.id ? null:
+                        <button Follow> Follow </button> 
+                    }
+  
                         
 
                 </div>
