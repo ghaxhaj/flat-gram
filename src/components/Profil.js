@@ -6,15 +6,23 @@ import { BrowserRouter as Router,
   } from 'react-router-dom';
 
 
-class UserCard extends Component {
+class Profil extends Component {
     state = {
-        edit: false,
-        name: '',
-        userName: '',
-        password: '',
-        email: '',
-        imageUrl: '',
+        userProfil: {},
+        edit: false, name: '', 
+        userName: '', email: '', 
+        password: '', imageUrl: ''
+    
 
+    }
+    componentDidMount(){
+        if (this.props.currentUser){
+        let id = this.props.currentUser.id
+        fetch(`http://localhost:3000/api/v1/users/${id}`)
+        .then(resp => resp.json())
+        .then(userProfil => this.setState({userProfil}))
+
+        }
     }
     
     toggleEdite = () => {
@@ -30,9 +38,8 @@ class UserCard extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()   
-        // let { id } = this.props.match.params; 
-        // console.log('****** id updat  **', id)  
-        fetch(`http://localhost:3000/api/v1/users/${this.props.id}`, {
+        let id = this.props.currentUser.id
+        fetch(`http://localhost:3000/api/v1/users/${id}`, {
             method: 'PATCH',
             headers: {"Content-Type": "application/json",
                       "Accept": "application/json"},    
@@ -45,9 +52,7 @@ class UserCard extends Component {
             }})
         })
         .then(resp=>resp.json())
-        .then(data =>  {console.log('***update data **', data) 
-            this.props.handleUpdateProfil(data)
-        })
+        .then(userProfil => this.setState({userProfil}) )
 
         this.setState({ 
             edit: false, name: '', 
@@ -58,35 +63,38 @@ class UserCard extends Component {
     }
 
     handleUserDelete = () => {
-        console.log('delete user prop id ***', this.props.id)
-        fetch(`http://localhost:3000/api/v1/users/${this.props.id}`, 
+        let id = this.props.currentUser.id
+        fetch(`http://localhost:3000/api/v1/users/${id}`, 
                {method: "DELETE"}
         )
         .then(resp => resp.json())
-        .then(data => this.props.deleteProfil(data))
+        .then(data => console.log(data))
+
+        this.setState({ 
+            edit: false, name: '', 
+            userName: '', email: '', 
+            password: '', imageUrl: ''
+        })
     }
 
 
 
     
-    render(){
-        console.log('delete user prop id ***', this.props.id)
-        
+    render(){  
+        console.log('searching currentUser.id****', this.props.currentUser)      
         return (
             
                 <div className='userCardDiv'>
-                    <Link to={`/users/${this.props.id}`}>
-                        <img className = "postImg" src={this.props.imageUrl} alt={this.props.name}/>
-                    </Link>
-                    <h1 > Name: {this.props.name}</h1>    
-                    <h1 > userName: {this.props.userName}</h1> 
-                    <h1 > Email: {this.props.email}</h1>
-                    <br></br>
-
+                   
+                    <img className = "postImg" src={this.state.userProfil.imageUrl} alt={this.state.userProfil.name}/>
                     
-                    { this.props.id === this.props.currentUser.id ? 
-                        <button onClick={this.toggleEdite}> Edit Profil </button>
-                    : null}
+                    <h1 > Name: {this.state.userProfil.name}</h1>    
+                    <h1 > userName: {this.state.userProfil.userName}</h1> 
+                    <h1 > Email: {this.state.userProfil.email}</h1>
+                    <br></br>
+ 
+                    <button onClick={this.toggleEdite}> Edit Profil </button>
+                   
                     {this.state.edit? 
                         <form className='userCardDiv' onSubmit={this.handleSubmit} >
                             <label>Name:</label>
@@ -122,17 +130,8 @@ class UserCard extends Component {
                         null
                     }
                     
-
-                    
-                    { this.props.id === this.props.currentUser.id ? 
                     <button onClick={this.handleUserDelete}> Delete Profil </button> 
-                    : 
-                        null 
-                    }
                     
-                    { this.props.id === this.props.currentUser.id ? null:
-                        <button Follow> Follow </button> 
-                    }
   
                         
 
@@ -141,4 +140,4 @@ class UserCard extends Component {
         )
     }
 }
-export default UserCard
+export default Profil

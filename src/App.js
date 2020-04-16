@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import {Home, Users, Posts, SignupForm, NavBar, SearchBar, 
-        LoginForm, ShowSinglePost, ShowSingleUser} from './components'
+        LoginForm, ShowSinglePost, ShowSingleUser, Profil} from './components'
 import UserContainer from './containers/UserContainer'
 import PostContainer from './containers/PostContainer'
 import MainContainer from './containers/MainContainer'
@@ -57,6 +57,7 @@ class  App extends Component {
 
 
   render() {
+    console.log('****app  ***' , this.currentUser)
 
   return (
 
@@ -69,12 +70,13 @@ class  App extends Component {
           {/* <Route exact path="/"> <Home /> </Route>
           <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/> */}
-
+          
           <Route path="/posts/:id"> <ShowSinglePost /> </Route>
           <Route path="/posts"> <PostContainer /> </Route>
 
-          <Route  path="/users/:id"> <ShowSingleUser /> </Route>
-          <Route exact path="/users"> <UserContainer /> </Route>
+          <Route path="/users/login"> <Profil currentUser={this.state.currentUser}/> </Route>
+          <Route  path="/users/:id"> <ShowSingleUser  /> </Route>
+          <Route exact path="/users"> <UserContainer currentUser={this.state.currentUser}/> </Route>
 
         </Switch>
         : 
@@ -84,7 +86,7 @@ class  App extends Component {
 
           <Switch>
           
-            <Route exact path="/"> <Home /> </Route>
+            {/* <Route exact path="/"> <Home /> </Route> */}
             <Route path="/login" render={() => <LoginForm setUser={this.setUser}/>}/>
             <Route path="/signup" render={() => <SignupForm setUser={this.setUser}/>}/>
 

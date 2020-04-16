@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import Users from '../components/Users'
 import ShowSingleUser from '../components/ShowSingleUser'
-
+import { withRouter } from "react-router";
+ 
 
 
 class UserContainer extends Component {
@@ -16,14 +17,33 @@ class UserContainer extends Component {
         .then(resp => resp.json())
         .then(users => this.setState({users}))
     }
-
+    deleteProfil = (UserTODelelte) => {
+        console.log('user to delete ****' , UserTODelelte)
+        let newUsers = this.state.users.filter(user => user.id !== UserTODelelte.id)
+        this.setState({users: newUsers})
+    }
     
+    handleUpdateProfil = (updatedProfil) => {
+        let newUsers = this.state.users.map(user => {
+            if (user.id===updatedProfil.id){
+                return updatedProfil
+            }else {
+                return user
+            }
+        })
+        this.setState({users: newUsers})
+    }
     render(){
-        // console.log(this.state)
+      
         return (
             <div>
                 <h1></h1>
-                <Users users ={this.state.users} />
+                <Users users ={this.state.users} 
+                handleUpdateProfil={this.handleUpdateProfil}  
+                deleteProfil={this.deleteProfil}  
+                currentUser={this.props.currentUser}
+
+                />
             </div>
         )
     }
