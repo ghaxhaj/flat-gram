@@ -20,7 +20,9 @@ import SignupForm from './SignupForm'
 import UserCard from './UserCard'
 
 import UserController from './UserController' 
-import Users from './UserCard'
+import Users from './UserCard'  
+
+import Profil from './Profil'
 
 
 export {
@@ -31,6 +33,6 @@ export {
     Posts , SearchBar ,
     ShowSinglePost , ShowSingleUser ,
     SignupForm ,UserCard ,
-    UserController ,Users 
+    UserController ,Users, Profil 
 
 }

@@ -4,11 +4,13 @@ import '../styles.css'
 import UserController from './UserController'
 import Posts from './Posts'
 import ShowSingleUser from './ShowSingleUser' 
+import Profil from './Profil' 
 
 
 const NavBar = (props) => {
     
-    console.log('****navbar props ***' , props)
+    console.log('****navbar props ***' , props.currentUser)
+    let id = props.currentUser
     return (
         <div className= "navBar">
             <div className= "logo">
@@ -23,7 +25,10 @@ const NavBar = (props) => {
                 <NavLink  to='/users'>Users</NavLink> </div>
             
             <div className= "logo">
-                <NavLink  to="/users/:id">Profil</NavLink> </div>
+                <NavLink  to="/users/login">Profil</NavLink> </div>
+            
+            {/* <div className= "logo">
+                <Profil currentUser={props.currentUser} /> </div> */}
             
             {/* <div className= "logo">
                 <NavLink  to="/">LogOut</NavLink> </div> */}
