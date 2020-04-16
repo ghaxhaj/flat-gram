@@ -5,6 +5,7 @@ import UserController from './UserController'
 import Posts from './Posts'
 import ShowSingleUser from './ShowSingleUser' 
 import Profil from './Profil' 
+import SearchBar from './SearchBar'
 
 
 const NavBar = (props) => {
@@ -26,9 +27,12 @@ const NavBar = (props) => {
             
             <div className= "logo">
                 <NavLink  to="/users/login">Profil</NavLink> </div>
-            
-            {/* <div className= "logo">
-                <Profil currentUser={props.currentUser} /> </div> */}
+
+            {/* <div className= "searchBar">
+                    <SearchBar />
+                </div> */}
+
+                
             
             {/* <div className= "logo">
                 <NavLink  to="/">LogOut</NavLink> </div> */}

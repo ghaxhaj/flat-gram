@@ -74,6 +74,8 @@ class  App extends Component {
           <Route path="/posts/:id"> <ShowSinglePost /> </Route>
           <Route path="/posts"> <PostContainer /> </Route>
 
+          <Route path="/search"> <SearchBar /> </Route>
+
           <Route path="/users/login"> <Profil currentUser={this.state.currentUser}/> </Route>
           <Route  path="/users/:id"> <ShowSingleUser  /> </Route>
           <Route exact path="/users"> <UserContainer currentUser={this.state.currentUser}/> </Route>
