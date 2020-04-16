@@ -2,14 +2,19 @@ import React, {Component} from 'react';
 
 class SearchBar extends Component
 {
+
     render(){
             
         return(
         
-            <div>
+            <div className='searchBar'>
                 
-                SearchBar: 
-                
+                    <input  name='name' type='text'
+                            onChange={this.props.handleSearchChange} 
+                            value={this.props.searchTerm}
+                            placeholder="🔍 Search User"
+                    
+                    />
     
             </div>
         )
