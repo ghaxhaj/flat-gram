@@ -4,7 +4,7 @@ class FollowersContainer extends React.Component {
     render(){
 
         return(
-            <div>FollowersContainer</div>
+            <div></div>
         )
     }
 }
