@@ -156,7 +156,7 @@ class PostCard extends Component{
     return this.state.comments.map(comment => 
     <div>
         <p key={comment.id}>{comment.content}</p>
-        {comment.user_id === this.props.currentUser.id ? <button className='booton' onClick={() => this.handleDelete(comment.id)}>Delete</button> : null}
+        {comment.user_id === this.props.currentUser.id ? <button onClick={() => this.handleDelete(comment.id)}>Delete</button> : null}
         </div>)
     }
     
@@ -211,7 +211,7 @@ class PostCard extends Component{
         </Link>
             <p>Post by: { this.props.user.userName}</p>
 
-            {console.log('*** props user after  ***' , this.props.user.userName)}
+            {console.log('*** props user after  ***' , this.props.currentUser.userName)}
 
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>

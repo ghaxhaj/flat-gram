@@ -101,7 +101,7 @@ class UserContainer extends Component {
                 handleButtonClick = {this.renderPostForm}
                 renderPosts = {this.handleDeletePost}
                 handleEdit = {this.handleUpdatePost}/> */}
-                <FollowersContainer />
+                {/* <FollowersContainer /> */}
 
                 <Users users ={this.state.users} 
                 handleUpdateProfil={this.handleUpdateProfil}  

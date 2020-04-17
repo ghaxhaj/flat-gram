@@ -9,7 +9,8 @@ class ShowSingleUser extends Component{
         targetUser: {posts: [] }
     }
     componentDidMount(){
-        let { id } = this.props.match.params;              
+        let { id } = this.props.match.params;
+        console.log(id)              
         fetch(`http://localhost:3000/api/v1/users/${id}`)
         .then(res => res.json())
         .then(targetUser => this.setState({
@@ -49,7 +50,10 @@ class ShowSingleUser extends Component{
     }
 
     mapPots = () => {
-        return this.state.targetUser.posts.map((post) => <p>{post.imageurl}</p>)
+        return this.state.targetUser.posts.map((post) => <div>
+            <img src = {post.content}/>
+            <p>User Caption: {post.user_caption}</p>
+            </div>)
     }
 
     render(){
@@ -70,7 +74,7 @@ class ShowSingleUser extends Component{
                     Email: {this.state.targetUser.email}
                     <br></br>
                     <ul>
-                    posts: 
+                    {this.state.targetUser.userName}'s Posts: 
                     <br></br> 
                     {this.mapPots()}
                     </ul>

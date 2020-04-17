@@ -18,15 +18,18 @@ const NavBar = (props) => {
                 <img className= "logoI" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F48394057%2F258081453087%2F2%2Foriginal.png?w=225&auto=format%2Ccompress&q=75&sharp=10&s=1d4ef9cb6418dc61ebdbb3ab0b587963" /> </div>
             <div className= "logo">
                 <UserController  logout={props.logout} currentUser={props.currentUser} /> </div>
+
+            <div className= "logo">
+                <NavLink  to='/'>FLATGRAM</NavLink> </div>
             
             <div className= "logo">
-                <NavLink  to='/posts'>Home</NavLink> </div>
+                <NavLink  to='/posts'>Posts</NavLink> </div>
             
             <div className= "logo">
                 <NavLink  to='/users'>Users</NavLink> </div>
             
             <div className= "logo">
-                <NavLink  to="/users/login">Profil</NavLink> </div>
+                <NavLink  to="/users/login">Profile</NavLink> </div>
 
             {/* <div className= "searchBar">
                     <SearchBar />
