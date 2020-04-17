@@ -13,8 +13,8 @@ function UserController(props){
       </button> 
       :
       <div>
-      <Link to="/login"><button className="login">LOG IN</button></Link>
-      <Link to="/signup"><button className="signup">SIGN UP</button></Link>
+      <Link to="/login"><button className="likeButton">LOG IN</button></Link>
+      <Link to="/signup"><button className="likeButton">SIGN UP</button></Link>
 
       </div>
 

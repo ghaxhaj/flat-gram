@@ -28,14 +28,14 @@ class ShowSinglePost extends Component{
 
         return(
         
-            <div>
+            <div className="postStyle">
                 <h1>More Details</h1>
                 <img src={this.state.targetPost.content} alt=''/> 
                 <br></br>
-                caption: {this.state.targetPost.user_caption}
+                Caption: {this.state.targetPost.user_caption}
                 <br></br>
                 <ul>
-                comments: 
+                Comments: 
                 <br></br> 
                 {this.mapComments()}
                 </ul>
