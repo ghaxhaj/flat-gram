@@ -83,8 +83,9 @@ class PostCard extends Component{
                 currentLike: like,
                 currentLikeId: like.id,
                 liked: !this.state.liked,
-                likes: this.state.likes + 1}))
-            this.componentDidMount()
+                likes: this.state.likes + 1}),
+                this.componentDidMount())
+            
             
         //     this.setState({
             
@@ -96,11 +97,11 @@ class PostCard extends Component{
     }else{
             fetch(`http://localhost:3000/api/v1/likes/${this.state.currentLikeId}`, {
             method: "DELETE"})
-            this.setState({
+            .then(this.setState({
                 currentLike: '',
                 currentLikeId: '',
                 liked: !this.state.liked,
-                likes: this.state.likes - 1})
+                likes: this.state.likes - 1}))
         //     this.setState({
         //         liked: !this.state.liked,
         //         likes: this.state.likes - 1
@@ -152,15 +153,20 @@ class PostCard extends Component{
     }
 
     mapComments = () => {
-    return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button className='CommentDeleteButoon' onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
+    return this.state.comments.map(comment => 
+    <div>
+        <p key={comment.id}>{comment.content}</p>
+        {comment.user_id === this.props.currentUser.id ? <button className='booton' onClick={() => this.handleDelete(comment.id)}>Delete</button> : null}
+        </div>)
     }
 
     handlePostDelete = () => {
+        if(this.props.user_id === this.props.currentUser.id){
         fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
             method: "DELETE"
         }).then(resp => resp.json())
         .then(data => this.props.renderPosts(this.props.id))
-    }
+    }}
 
     handleEditPost = () => {
         this.setState({editPost: !this.state.editPost })  
@@ -168,7 +174,7 @@ class PostCard extends Component{
 
     handleEditPostSubmit = (event) => {
         event.preventDefault()
-        
+        if(this.props.user_id === this.props.currentUser.id){
         fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
             method: 'PATCH',
             headers: {"Content-Type": "application/json",
@@ -182,7 +188,7 @@ class PostCard extends Component{
         .then(data =>  {this.props.handleUpdatePost(data)})
 
         this.setState({ newContent: "" , userCaption: '', editPost: false })  
-    } 
+    }}
 
     handleAddComment = () => {
         this.setState({ addNewComment: !this.state.addNewComment})
@@ -191,7 +197,7 @@ class PostCard extends Component{
     
 
     render(){
-        // console.log(this.state.allLikes)
+        console.log(this.props)
         
     return(
         <div className = "userCardDiv">
@@ -204,9 +210,14 @@ class PostCard extends Component{
             {this.state.comments.length > 0 ? this.mapComments() : null}
 
             <Like handleLike = {this.handleLike}/>
-            <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button>
+
+            {this.props.user_id === this.props.currentUser.id ?
+            <button className = "button" onClick = {this.handlePostDelete}>Delete Post</button> : null
+            }
             
-            <button className = "button" onClick={this.handleEditPost}>Edit</button>
+            {this.props.user_id === this.props.currentUser.id ?
+            <button className = "button" onClick={this.handleEditPost}>Edit</button> : null
+            }
             {this.state.editPost ? 
                 <form onSubmit={this.handleEditPostSubmit}>
                     <label>content:</label>

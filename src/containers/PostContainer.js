@@ -36,7 +36,7 @@ renderPosts = () => {
         event.preventDefault()
         
         let data = {
-            user_id: 1, 
+            user_id: this.props.currentUser.id, 
             content: this.state.addedUrl,
             user_caption: this.state.addedCaption
         }
@@ -80,6 +80,7 @@ renderPosts = () => {
         }
     render(){
         // console.log("****posts***" , this.state.posts)
+        
         return (
             <div>
                 <h1></h1>

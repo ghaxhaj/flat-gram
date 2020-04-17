@@ -20,7 +20,7 @@ class UserContainer extends Component {
         .then(users => this.setState({users}))
     }
     deleteProfil = (UserTODelelte) => {
-        console.log('user to delete ****' , UserTODelelte)
+        
         let newUsers = this.state.users.filter(user => user.id !== UserTODelelte.id)
         this.setState({users: newUsers})
     }
@@ -29,7 +29,7 @@ class UserContainer extends Component {
         event.preventDefault()
         
         let data = {
-            user_id: 1, 
+            user_id: this.state.currentUser.id, 
             content: this.state.addedUrl,
             user_caption: this.state.addedCaption
         }
@@ -91,7 +91,7 @@ class UserContainer extends Component {
         return (
             <div>
                 <h1></h1>
-                <PostContainer posts ={this.state.posts} 
+                {/* <PostContainer posts ={this.state.posts} 
                 clicked = {this.state.clicked}
                 addUrl = {this.state.addedUrl}
                 addedCaption = {this.state.addedCaption}
@@ -99,7 +99,7 @@ class UserContainer extends Component {
                 handleSubmit = {this.handleSubmit}
                 handleButtonClick = {this.renderPostForm}
                 renderPosts = {this.handleDeletePost}
-                handleEdit = {this.handleUpdatePost}/>
+                handleEdit = {this.handleUpdatePost}/> */}
                 <FollowersContainer />
                 <Users users ={this.state.users} 
                 handleUpdateProfil={this.handleUpdateProfil}  
