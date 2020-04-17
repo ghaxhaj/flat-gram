@@ -135,6 +135,7 @@ class PostCard extends Component{
     mapComments = () => {
     return this.state.comments.map(comment => <p key={comment.id}>{comment.content}<button className='CommentDeleteButoon' onClick={() => this.handleDelete(comment.id)}>Delete</button></p>)
     }
+    
 
     handlePostDelete = () => {
         fetch(`http://localhost:3000/api/v1/posts/${this.props.id}`, {
@@ -172,13 +173,18 @@ class PostCard extends Component{
     
 
     render(){
-        // console.log(this.state.allLikes)
+        // console.log('*** props user ***' , this.props.user.userName)
         
     return(
         <div className = "userCardDiv">
+
         <Link to={`/posts/${this.props.id}`}>
             <img  className = "postImg" src={this.props.content} />
         </Link>
+            <p>Post by: { this.props.user.userName}</p>
+
+            {console.log('*** props user after  ***' , this.props.user.userName)}
+
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>
 

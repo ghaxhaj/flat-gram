@@ -51,12 +51,19 @@ class SignupForm extends React.Component {
   render(){
     return (
       <div className="center-form">
-        <form className="auth-form" onSubmit={this.handleSubmit}>
         
-          <input name="userName" value={this.state.userName} onChange={this.handleChange}placeholder="username"/>
-          <input name="password" value={this.state.password} type="password"  onChange={this.handleChange}placeholder="password"/>
-          <input name="passwordConfirmation" value={this.state.passwordConfirmation} type="password"  onChange={this.handleChange}placeholder="password confirmation"/>
-          <button className="login" type="submit">Sign Up</button>
+        <form className="formLogin" onSubmit={this.handleSubmit}>
+          <h1 className='salut'> Hi {this.state.userName}</h1>
+          <input className="formInput" name="userName" value={this.state.userName} onChange={this.handleChange}placeholder="username"/>
+          <br></br>
+          <br></br>
+          <input className="formInput" name="password" value={this.state.password} type="password"  onChange={this.handleChange}placeholder="password"/>
+          <br></br>
+          <br></br>
+          <input className="formInput" name="passwordConfirmation" value={this.state.passwordConfirmation} type="password"  onChange={this.handleChange}placeholder="password confirmation"/>
+          <br></br>
+          <br></br>
+          <button className="formInput" type="submit">Sign Up</button>
         </form>
       </div>
     )
