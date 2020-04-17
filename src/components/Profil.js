@@ -93,7 +93,7 @@ class Profil extends Component {
                     <h1 > Email: {this.state.userProfil.email}</h1>
                     <br></br>
  
-                    <button onClick={this.toggleEdite}> Edit Profil </button>
+                    <button className = "button" onClick={this.toggleEdite}> Edit Profile </button>
                    
                     {this.state.edit? 
                         <form className='userCardDiv' onSubmit={this.handleSubmit} >
@@ -130,7 +130,7 @@ class Profil extends Component {
                         null
                     }
                     
-                    <button onClick={this.handleUserDelete}> Delete Profil </button> 
+                    <button className = "button"onClick={this.handleUserDelete}> Delete Profile </button> 
                     
   
                         

@@ -6,6 +6,11 @@ import Posts from '../components/Posts'
 
 class PostContainer extends Component {
 
+renderPosts = () => {
+    return this.props.posts.map(post => <Posts key={post.id} 
+        renderPosts = {this.props.renderPosts}
+        updatePost = {this.props.handleEdit} 
+        {...post} />)}
     state = {
         posts: [],
         addedUrl: '',
@@ -14,7 +19,7 @@ class PostContainer extends Component {
     }
 
     componentDidMount(){
-        console.log('mounted')
+        // console.log('mounted')
         fetch('http://localhost:3000/api/v1/posts')
         .then(resp => resp.json())
         .then(posts => this.setState({posts}) )
@@ -74,7 +79,7 @@ class PostContainer extends Component {
             this.setState({posts: newPosts})
         }
     render(){
-        console.log("****posts***" , this.state.posts)
+        // console.log("****posts***" , this.state.posts)
         return (
             <div>
                 <h1></h1>
@@ -87,6 +92,7 @@ class PostContainer extends Component {
                 handleButtonClick = {this.renderPostForm}
                 renderPosts = {this.handleDeletePost}
                 handleUpdatePost={this.handleUpdatePost}
+                currentUser = {this.props.currentUser}
                 />
                 
                
