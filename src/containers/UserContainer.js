@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Users from '../components/Users'
 import ShowSingleUser from '../components/ShowSingleUser'
 import { withRouter } from "react-router";
-import PostContainer from './PostContainer'
-import FollowersContainer from './FollowersContainer'
  
 
 
@@ -24,6 +22,7 @@ class UserContainer extends Component {
         let newUsers = this.state.users.filter(user => user.id !== UserTODelelte.id)
         this.setState({users: newUsers})
     }
+
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -75,6 +74,7 @@ class UserContainer extends Component {
             })
             this.setState({posts: newPosts})
         }
+
     
     handleUpdateProfil = (updatedProfil) => {
         let newUsers = this.state.users.map(user => {
@@ -91,6 +91,7 @@ class UserContainer extends Component {
         return (
             <div>
                 <h1></h1>
+
                 {/* <PostContainer posts ={this.state.posts} 
                 clicked = {this.state.clicked}
                 addUrl = {this.state.addedUrl}
@@ -101,6 +102,7 @@ class UserContainer extends Component {
                 renderPosts = {this.handleDeletePost}
                 handleEdit = {this.handleUpdatePost}/> */}
                 <FollowersContainer />
+
                 <Users users ={this.state.users} 
                 handleUpdateProfil={this.handleUpdateProfil}  
                 deleteProfil={this.deleteProfil}  

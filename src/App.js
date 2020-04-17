@@ -84,7 +84,7 @@ class  App extends Component {
         : 
         <div>
 
-          <h1> 🤙🤙🤙 Please Login or SignUp 🤙🤙🤙  </h1>
+          <h1 className="warning"> 🤙🤙🤙 Please Login or SignUp 🤙🤙🤙  </h1>
 
           <Switch>
           

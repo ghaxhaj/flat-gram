@@ -6,11 +6,16 @@ import Posts from '../components/Posts'
 
 class PostContainer extends Component {
 
-renderPosts = () => {
-    return this.props.posts.map(post => <Posts key={post.id} 
-        renderPosts = {this.props.renderPosts}
-        updatePost = {this.props.handleEdit} 
-        {...post} />)}
+    renderPosts = () => {
+
+        return this.props.posts.map(post => <Posts key={post.id} 
+            renderPosts = {this.props.renderPosts}
+            updatePost = {this.props.handleEdit} 
+            {...post} 
+            currentUser = {this.props.currentUser}
+            />)
+    }
+
     state = {
         posts: [],
         addedUrl: '',
@@ -49,12 +54,16 @@ renderPosts = () => {
         })
 
         .then(resp=>resp.json())
-        .then(post => this.setState({
-            posts: [...this.state.posts, post],
+        // .then(console.log)
+        .then(post => {
+            let newPost = {...post, user:{userName: this.props.currentUser.userName}}
+            this.setState({
+            posts: [...this.state.posts, newPost],
             addedUrl: '',
             addedCaption: '',
             clicked: false})
-        )}
+            })
+    }
 
         renderPostForm = () => {
             this.setState({

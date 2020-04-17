@@ -6,8 +6,7 @@ import { withRouter } from "react-router";
 class ShowSingleUser extends Component{
 
     state = {
-        
-        targetUser: { }
+        targetUser: {posts: [] }
     }
     componentDidMount(){
         let { id } = this.props.match.params;              
@@ -49,6 +48,10 @@ class ShowSingleUser extends Component{
         
     }
 
+    mapPots = () => {
+        return this.state.targetUser.posts.map((post) => <p>{post.imageurl}</p>)
+    }
+
     render(){
         // console.log('*** this props ***', this.props)
         // console.log('***props handleUpdateProfil***', this.props.handleUpdateProfil)
@@ -66,6 +69,11 @@ class ShowSingleUser extends Component{
                     <br></br>
                     Email: {this.state.targetUser.email}
                     <br></br>
+                    <ul>
+                    posts: 
+                    <br></br> 
+                    {this.mapPots()}
+                    </ul>
             </div>
         )
     } 

@@ -159,6 +159,7 @@ class PostCard extends Component{
         {comment.user_id === this.props.currentUser.id ? <button className='booton' onClick={() => this.handleDelete(comment.id)}>Delete</button> : null}
         </div>)
     }
+    
 
     handlePostDelete = () => {
         if(this.props.user_id === this.props.currentUser.id){
@@ -197,13 +198,21 @@ class PostCard extends Component{
     
 
     render(){
+
+    
         console.log(this.props)
+
         
     return(
         <div className = "userCardDiv">
+
         <Link to={`/posts/${this.props.id}`}>
             <img  className = "postImg" src={this.props.content} />
         </Link>
+            <p>Post by: { this.props.user.userName}</p>
+
+            {console.log('*** props user after  ***' , this.props.user.userName)}
+
             <p>User Caption: {this.props.user_caption}</p>
             <p>{this.state.likes} Likes </p>
 
