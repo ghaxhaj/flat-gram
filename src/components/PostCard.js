@@ -17,7 +17,9 @@ class PostCard extends Component{
         liked: false,
         addComment: '',
         comments: [],
-        currentLikeId: '',
+        currentLikeId: null,
+        currentLike: '',
+        allLikes: [],
        
 
         editPost: false,
@@ -51,14 +53,17 @@ class PostCard extends Component{
     fetchLikes = (likes) => {
         let postLikes = likes.filter(like => like.post_id === this.props.id)
         let likeCount = postLikes.length
-        this.setState({likes: likeCount})
+        this.setState({
+            allLikes: postLikes, 
+            likes: likeCount})
     }
 
     
 
     handleLike = () => {
 
-        if(this.state.liked === false){
+
+        if(this.state.currentLike === ''){
 
         let data = {
             user_id: this.props.currentUser.id,
@@ -74,20 +79,34 @@ class PostCard extends Component{
             "Accept": "application/json"},    
             body: JSON.stringify(data)})
             .then(resp => resp.json())
-            .then(like => this.setState({currentLikeId: like.id}))
+            .then(like => this.setState({
+                currentLike: like,
+                currentLikeId: like.id,
+                liked: !this.state.liked,
+                likes: this.state.likes + 1}))
+            this.componentDidMount()
             
-            this.setState({
+        //     this.setState({
             
-            liked: !this.state.liked,
-            likes: this.state.likes + 1
-        })}
-        else{
+        //     liked: !this.state.liked,
+        //     likes: this.state.likes + 1
+        // })
+   
+        console.log("done")
+    }else{
             fetch(`http://localhost:3000/api/v1/likes/${this.state.currentLikeId}`, {
             method: "DELETE"})
             this.setState({
+                currentLike: '',
+                currentLikeId: '',
                 liked: !this.state.liked,
-                likes: this.state.likes - 1
-        })
+                likes: this.state.likes - 1})
+        //     this.setState({
+        //         liked: !this.state.liked,
+        //         likes: this.state.likes - 1
+        // })
+       
+        console.log("undone")
     }}
     
     handleOnChange = (event) => {
