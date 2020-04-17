@@ -89,6 +89,7 @@ class PostContainer extends Component {
         }
     render(){
         // console.log("****posts***" , this.state.posts)
+        
         return (
             <div>
                 <h1></h1>
