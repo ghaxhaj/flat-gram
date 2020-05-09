@@ -1,32 +1,7 @@
-class User
-    has_many :posts
-
-    has_many :likes
-    has_many :post_likes, through: :likes, class_name: "Post"
-
-    has_many :comments
-    has_many :post_comments, through: :comments, class_name: "Post"
-end 
-
-
-class Post
-    belongs_to :user
-
-    has_many :likes
-    has_many :user_likes, through: :likes, class_name: "User"
-
-    has_many :comments  
-    has_many :user_comments, through: :comments, class_name: "User"
- 
-end
-
-class Like
-    belongs_to :user
-    belongs_to :post   
-end  
-
-class comment
-    belongs_to :user
-    belongs_to :post   
-end
-
+Flat-gram 
+Flat-gram is a social media app to keep Flatrion school students connected built with Rails (back-end) and React (front-end)
+Utilized JSON Web Tokens and localStorage to store encrypted user information client-side and bcript password hashing to encrypt the password (back-end) in the database. 
+login/logout secure the app so that user information can be tracked.
+Make a post allow user to interact with the app
+Update profile and post gives the ability to users to maintain their information.
+Delete account and post allow the users to clean their record in the database.
